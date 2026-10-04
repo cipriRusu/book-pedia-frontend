@@ -21,10 +21,9 @@ function App() {
         </div>
       </div>
       <div className="flex w-6xl mx-auto">
-        <CustomCard />
-        <CustomCard />
-        <CustomCard />
-        <CustomCard />
+        {[1, 2, 3, 4].map((x: number) => {
+          return <CustomCard key={x} title="Placeholder" content="Placeholder" footer="Placeholder" />
+        })}
       </div>
       <Routes>
       </Routes>
