@@ -1,12 +1,7 @@
 import { Card, CardContent, CardFooter, CardHeader } from "../../components/ui/card";
+import type { IFrontPageCard } from "../interfaces/IFrontPage";
 
-interface ICustomCard {
-    title: string,
-    content: string,
-    footer: string
-}
-
-const CustomCard = ({ title, content, footer }: ICustomCard) => {
+const CustomCard = ({ title, content, footer }: IFrontPageCard) => {
     return <Card className="w-[25%] mx-4 mt-12 py-0">
         <img className="hover:scale-x-102 duration-700 cursor-pointer" src="https://picsum.photos/seed/picsum/600/400?grayscale" />
         <CardHeader>
