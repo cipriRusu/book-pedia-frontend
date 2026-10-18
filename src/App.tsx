@@ -1,25 +1,26 @@
-import { Routes } from "react-router"
+import { Routes, Route } from "react-router"
 import Header from "./components/Header"
 import Footer from "./components/Footer"
 import Hero from "./components/Hero";
 import CustomCard from "./components/CustomCard";
+import { Spinner } from "../components/ui/spinner";
 import { useEffect, useState } from "react";
+import { FRONTPAGE_API_CALL } from "./utils/LinkBuilder";
+import type { IFrontPageCard } from "./interfaces/IFrontPage";
 
 function App() {
-  const [header, setHeader] = useState<any>();
+  const [frontPage, setFrontPage] = useState<any>();
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     let getData = async () => {
-      //TODO: Extract method
-      let req = (await fetch(`http://${import.meta.env.VITE_API_ADDRESS}:${import.meta.env.VITE_API_PORT}/${import.meta.env.VITE_FRONTPAGE_ROUTE}`));
-      let data = await req.json()
+      let data = await FRONTPAGE_API_CALL();
 
       //Added timeout to make the loader visible. Wil be removed in a future version
       await new Promise(resolve => setTimeout(resolve, 5000));
-      
+
       setIsLoading(false);
-      setHeader(data);
+      setFrontPage(data);
     }
 
     getData();
@@ -27,23 +28,38 @@ function App() {
 
   return (
     <>
-      <Header isLoading={isLoading} header={header} />
-      <Hero />
-      <div className="flex w-6xl mx-auto">
-        <div className="mx-4 my-12">
-          {header?.frontPageBody}
-        </div>
-      </div>
-      <div className="flex w-6xl mx-auto">
-        {[1, 2, 3, 4].map((x: number) => {
-          return <CustomCard key={x} title="Placeholder" content="Placeholder" footer="Placeholder" />
-        })}
-      </div>
-      <Routes>
-      </Routes>
-      <Footer />
+      {isLoading ?
+        <>
+          {/*TODO: Add Loading text*/}
+          <Spinner className="size-16 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" />
+        </>
+        :
+        <>
+          <Header isLoading={isLoading} header={frontPage?.header} topHeader={frontPage?.topHeader} frontPageBody={""} cards={[]} />
+          <Routes>
+            <Route index element={
+              <>
+                <Hero />
+                <div className="flex w-6xl mx-auto">
+                  <div className="mx-4 my-12">
+                    {frontPage?.frontPageBody}
+                  </div>
+                </div>
+                <div className="flex max-w-6xl mx-auto">
+                  {frontPage?.cards?.map((card: IFrontPageCard, index: number) => {
+                    return <CustomCard key={index} title={card?.title} content={card?.content} footer={card?.footer} />
+                  })}
+                </div>
+              </>
+            }>
+            </Route>
+            <Route path="/all" element={<></>}></Route>
+          </Routes>
+          <Footer />
+        </>
+      }
     </>
   )
 }
 
-export default App
+export default App;
