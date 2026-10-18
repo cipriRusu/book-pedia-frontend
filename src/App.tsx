@@ -3,21 +3,36 @@ import Header from "./components/Header"
 import Footer from "./components/Footer"
 import Hero from "./components/Hero";
 import CustomCard from "./components/CustomCard";
+import { useEffect, useState } from "react";
 
 function App() {
+  const [header, setHeader] = useState<any>();
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    let getData = async () => {
+      //TODO: Extract method
+      //TODO: Create .env to handle API calls and routes
+      let req = (await fetch("http://localhost:3001/frontpage"));
+      let data = await req.json()
+
+      //Added timeout to make the loader visible. Wil be removed in a future version
+      await new Promise(resolve => setTimeout(resolve, 5000));
+      
+      setIsLoading(false);
+      setHeader(data);
+    }
+
+    getData();
+  }, [])
+
   return (
     <>
-      <Header />
+      <Header isLoading={isLoading} header={header} />
       <Hero />
       <div className="flex w-6xl mx-auto">
         <div className="mx-4 my-12">
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-          Lorem Ipsum has been the industry's standard dummy text ever since 1966,
-          when designers at Letraset and James Mosley, the librarian at St Bride Printing Library
-          in London, took a 1914 Cicero translation and scrambled it to make dummy text for Letraset's
-          Body Type sheets. It has survived not only many decades, but also the leap into electronic typesetting,
-          remaining essentially unchanged. It was popularised thanks to these sheets and more recently with desktop
-          publishing software like Aldus PageMaker and Microsoft Word including versions of Lorem Ipsum.
+          {header?.frontPageBody}
         </div>
       </div>
       <div className="flex w-6xl mx-auto">
