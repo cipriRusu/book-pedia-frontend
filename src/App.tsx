@@ -12,8 +12,7 @@ function App() {
   useEffect(() => {
     let getData = async () => {
       //TODO: Extract method
-      //TODO: Create .env to handle API calls and routes
-      let req = (await fetch("http://localhost:3001/frontpage"));
+      let req = (await fetch(`http://${import.meta.env.VITE_API_ADDRESS}:${import.meta.env.VITE_API_PORT}/${import.meta.env.VITE_FRONTPAGE_ROUTE}`));
       let data = await req.json()
 
       //Added timeout to make the loader visible. Wil be removed in a future version
