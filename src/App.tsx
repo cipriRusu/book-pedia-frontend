@@ -6,18 +6,18 @@ import CustomCard from "./components/CustomCard";
 import { Spinner } from "../components/ui/spinner";
 import { useEffect, useState } from "react";
 import { FRONTPAGE_API_CALL } from "./utils/LinkBuilder";
-import type { IFrontPageCard } from "./interfaces/IFrontPage";
+import type { IFrontPage, IFrontPageCard } from "./interfaces/IFrontPage";
 
 function App() {
-  const [frontPage, setFrontPage] = useState<any>();
-  const [isLoading, setIsLoading] = useState(true);
+  const [frontPage, setFrontPage] = useState<IFrontPage>();
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    let getData = async () => {
-      let data = await FRONTPAGE_API_CALL();
+    const getData = async () => {
+      const data = await FRONTPAGE_API_CALL();
 
       //Added timeout to make the loader visible. Wil be removed in a future version
-      await new Promise(resolve => setTimeout(resolve, 5000));
+      //await new Promise(resolve => setTimeout(resolve, 5000));
 
       setIsLoading(false);
       setFrontPage(data);
@@ -35,7 +35,7 @@ function App() {
         </>
         :
         <>
-          <Header isLoading={isLoading} header={frontPage?.header} topHeader={frontPage?.topHeader} frontPageBody={""} cards={[]} />
+          <Header isLoading={isLoading} header={frontPage?.header || "N/A"} topHeader={frontPage?.topHeader || "N/A"} frontPageBody={""} cards={[]} />
           <Routes>
             <Route index element={
               <>
@@ -45,7 +45,7 @@ function App() {
                     {frontPage?.frontPageBody}
                   </div>
                 </div>
-                <div className="flex max-w-6xl mx-auto">
+                <div className="flex flex-wrap max-w-6xl mx-auto">
                   {frontPage?.cards?.map((card: IFrontPageCard, index: number) => {
                     return <CustomCard key={index} title={card?.title} content={card?.content} footer={card?.footer} />
                   })}
