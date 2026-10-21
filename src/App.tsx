@@ -16,6 +16,8 @@ function App() {
     const getData = async () => {
       const data = await FRONTPAGE_API_CALL();
 
+      console.log(data)
+
       //Added timeout to make the loader visible. Wil be removed in a future version
       //await new Promise(resolve => setTimeout(resolve, 5000));
 
