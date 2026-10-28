@@ -7,6 +7,7 @@ import { Spinner } from "../components/ui/spinner";
 import { useEffect, useState } from "react";
 import { FRONTPAGE_API_CALL } from "./utils/LinkBuilder";
 import type { IFrontPage, IFrontPageCard } from "./interfaces/IFrontPage";
+import Article from "./components/Article";
 
 function App() {
   const [frontPage, setFrontPage] = useState<IFrontPage>();
@@ -15,8 +16,6 @@ function App() {
   useEffect(() => {
     const getData = async () => {
       const data = await FRONTPAGE_API_CALL();
-
-      console.log(data)
 
       //Added timeout to make the loader visible. Wil be removed in a future version
       //await new Promise(resolve => setTimeout(resolve, 5000));
@@ -49,13 +48,15 @@ function App() {
                 </div>
                 <div className="flex flex-wrap max-w-6xl mx-auto">
                   {frontPage?.cards?.map((card: IFrontPageCard, index: number) => {
-                    return <CustomCard key={index} title={card?.title} content={card?.content} footer={card?.footer} />
+                    //TODO: Create loader/skeleton for data loading
+                    return <CustomCard key={index} primary_key={card.primary_key} title={card?.title} content={card?.content} footer={card?.footer} />
                   })}
                 </div>
               </>
             }>
             </Route>
             <Route path="/all" element={<></>}></Route>
+            <Route path="/article/:id" element={<Article />}></Route>
           </Routes>
           <Footer />
         </>
