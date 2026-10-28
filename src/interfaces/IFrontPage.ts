@@ -6,6 +6,7 @@ export interface IFrontPage {
 }
 
 export interface IFrontPageCard {
+    primary_key: string;
     title: string;
     content: string;
     footer: string;
