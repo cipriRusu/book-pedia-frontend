@@ -11,3 +11,10 @@ export interface IFrontPageCard {
     content: string;
     footer: string;
 }
+
+export interface IArticle {
+    primary_key: string;
+    title: string;
+    description: string;
+    footer: string;
+}
