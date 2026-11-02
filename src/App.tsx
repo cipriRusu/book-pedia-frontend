@@ -10,7 +10,7 @@ import type { IFrontPage, IFrontPageCard } from "./interfaces/IFrontPage";
 import Article from "./components/Article";
 
 function App() {
-  const [frontPage, setFrontPage] = useState<IFrontPage>();
+  const [frontPage, setFrontPage] = useState<IFrontPage | null>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
@@ -22,6 +22,10 @@ function App() {
 
       setIsLoading(false);
       setFrontPage(data);
+
+      return () => {
+        setFrontPage(null)
+      }
     }
 
     getData();
