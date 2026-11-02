@@ -6,7 +6,7 @@ type IHeaderProps = IFrontPage & {
 }
 
 function Header({ topHeader, header, isLoading }: IHeaderProps) {
-    return <header className="fixed bg-secondary w-full border-b border-border">
+    return <header className="bg-secondary w-full border-b border-border">
         <div className="mx-auto max-w-6xl px-4 py-5">
             <span className="block font-sans text-[0.65rem] font-semibold uppercase tracking-[0.32em] text-primary">
                 {isLoading ? "LOADING" : topHeader}
