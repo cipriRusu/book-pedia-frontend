@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import type { IArticle } from "../interfaces/IFrontPage";
+import { ARTICLE_API_CALL } from "../utils/LinkBuilder";
 
 const Article = () => {
     const { id } = useParams();
@@ -8,8 +9,7 @@ const Article = () => {
 
     useEffect(() => {
         const fetchArticle = async () => {
-            const res = await fetch(`http://localhost:3001/article/${id}`);
-            const data = await res.json();
+            const data = await ARTICLE_API_CALL(id);
             setArticle(data);
         }
         fetchArticle();
