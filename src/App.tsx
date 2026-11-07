@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { FRONTPAGE_API_CALL } from "./utils/LinkBuilder";
 import type { IFrontPage, IFrontPageCard } from "./interfaces/IFrontPage";
 import Article from "./components/Article";
+import Listing from "./components/Listing";
 
 function App() {
   const [frontPage, setFrontPage] = useState<IFrontPage | null>();
@@ -61,6 +62,7 @@ function App() {
             </Route>
             <Route path="/all" element={<></>}></Route>
             <Route path="/article/:id" element={<Article />}></Route>
+            <Route path="/listing" element={<Listing />}></Route>
           </Routes>
           <Footer />
         </>
