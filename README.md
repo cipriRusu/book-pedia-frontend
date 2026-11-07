@@ -9,6 +9,8 @@ The project needs a running backend [Bookpedia Backend](https://github.com/cipri
 VITE_API_ADDRESS="http://localhost" #This points to the API's address. Assuming that it's run locally It's defaulted to localhost
 VITE_API_PORT=3001 #This point to the API's PORT, defaulted to 3001
 VITE_FRONTPAGE_ROUTE="frontpage" #Frontpage's default frontpage route, might change in the future so I've extracted it into it's own variable
+VITE_LISTING_ROUTE="listing"
+VITE_ARTICLE_ROUTE="article"
 ```
 
 Inside the project folder run the following commands in the terminal:
