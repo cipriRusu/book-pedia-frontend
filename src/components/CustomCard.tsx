@@ -11,11 +11,13 @@ const CustomCard = ({ primary_key, title, content, footer }: IFrontPageCard) => 
         <CardHeader>
             <h1 className="bold text-xl">{title}</h1>
         </CardHeader>
-        <CardContent>
+        <CardContent className="line-clamp-3">
             {content}
         </CardContent>
         <CardFooter>
+            <div className="line-clamp-2">
             {footer}
+            </div>
         </CardFooter>
     </Card>
 }
