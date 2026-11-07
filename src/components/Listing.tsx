@@ -2,6 +2,13 @@ import { useEffect, useState } from "react";
 import type { IArticle } from "../interfaces/IFrontPage";
 import { useSearchParams } from "react-router";
 import { LISTING_API_CALL } from "../utils/LinkBuilder";
+import {
+    Accordion,
+    AccordionContent,
+    AccordionItem,
+    AccordionTrigger,
+} from "../../components/ui/accordion";
+import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from "../../components/ui/card";
 
 const Listing = () => {
     //TODO: Develop listing page further
@@ -20,8 +27,22 @@ const Listing = () => {
     }, [searchParams])
 
     return <div className="mx-auto max-w-6xl px-4 py-5">
-        {articles?.map((x: IArticle) => {
-            return <h1>{x.title}</h1>
+        <Accordion className="px-4 pb-5" type="multiple">
+            <AccordionItem value="item-1">
+                <AccordionTrigger>Article Filters</AccordionTrigger>
+                <AccordionContent>
+                    W.I.P
+                </AccordionContent>
+            </AccordionItem>
+        </Accordion>
+        {articles?.map((article: IArticle, index: number) => {
+            return <Card key={index} className="flex mb-16">
+                <CardHeader>
+                    <CardTitle><h1>{article.title}</h1></CardTitle>
+                    <CardDescription>{article.description}</CardDescription>
+                </CardHeader>
+                <CardFooter>{article.footer}</CardFooter>
+            </Card>
         })}</div>
 }
 
