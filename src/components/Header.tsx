@@ -16,8 +16,7 @@ function Header({ topHeader, header, isLoading }: IHeaderProps) {
             </span>
             <nav className="flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-border pt-3 font-sans text-xs uppercase tracking-[0.14em] text-muted-foreground">
                 <Link to="/">Home</Link>
-                <Link to="/all">All</Link>
-                <Link to="/botany">Botany</Link>
+                <Link to="/listing">Search</Link>
             </nav>
         </div>
     </header>
