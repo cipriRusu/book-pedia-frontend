@@ -11,6 +11,7 @@ VITE_API_PORT=3001 #This point to the API's PORT, defaulted to 3001
 VITE_FRONTPAGE_ROUTE="frontpage" #Frontpage's default frontpage route, might change in the future so I've extracted it into it's own variable
 VITE_LISTING_ROUTE="listing"
 VITE_ARTICLE_ROUTE="article"
+VITE_TAGS_ROUTE="tags"
 ```
 
 Inside the project folder run the following commands in the terminal:
