@@ -18,3 +18,7 @@ export interface IArticle {
     description: string;
     footer: string;
 }
+
+export interface ITag {
+    title: string;
+}
