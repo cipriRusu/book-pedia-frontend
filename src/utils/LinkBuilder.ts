@@ -15,3 +15,9 @@ export const ARTICLE_API_CALL = async (articleId: string) => {
     const data = await req.json();
     return data;
 }
+
+export const TAGS_API_CALL = async () => {
+    const req = await fetch(`${import.meta.env.VITE_API_ADDRESS}:${import.meta.env.VITE_API_PORT}/${import.meta.env.VITE_TAGS_ROUTE}`);
+    const data = await req.json();
+    return data;
+}
