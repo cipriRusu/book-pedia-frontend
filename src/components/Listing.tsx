@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import type { IArticle } from "../interfaces/IFrontPage";
+import type { IArticle, ITag } from "../interfaces/IFrontPage";
 import { useSearchParams } from "react-router";
-import { LISTING_API_CALL } from "../utils/LinkBuilder";
+import { LISTING_API_CALL, TAGS_API_CALL } from "../utils/LinkBuilder";
 import {
     Accordion,
     AccordionContent,
@@ -13,13 +13,29 @@ import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from "../../
 const Listing = () => {
     //TODO: Develop listing page further
     let [articles, setArticles] = useState<IArticle[] | null>();
+    //TODO: Implement tag handling in params
+    let [_tags, setTags] = useState<ITag[] | null>();
+
     const [searchParams, _setSearchParams] = useSearchParams();
+
+    useEffect(() => {
+        const fetchTags = async () => {
+            const data = await TAGS_API_CALL();
+            setTags(data);
+        }
+
+        fetchTags();
+        return () => {
+            setTags(null);
+        }
+    }, [])
 
     useEffect(() => {
         const fetchListings = async () => {
             const data = await LISTING_API_CALL(searchParams);
             setArticles(data);
         }
+
         fetchListings();
         return () => {
             setArticles(null);
@@ -31,7 +47,6 @@ const Listing = () => {
             <AccordionItem value="item-1">
                 <AccordionTrigger>Article Filters</AccordionTrigger>
                 <AccordionContent>
-                    W.I.P
                 </AccordionContent>
             </AccordionItem>
         </Accordion>
